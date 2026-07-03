@@ -1,0 +1,977 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Facilita &amp; SL Investe — Biblioteca de Conhecimento</title>
+<meta name="description" content="Biblioteca de conhecimento da transição estratégica Facilita &amp; SL Investe: modelo de compra, venda e locação de veículos com opção de compra.">
+<meta name="robots" content="noindex, nofollow">
+<style>
+  @font-face {
+    font-family: 'Source Serif';
+    src: local('Source Serif 4'), local('Source Serif Pro');
+  }
+
+  :root {
+    --bg: #F7F7F5;
+    --bg-raised: #FFFFFF;
+    --ink: #1C1E1B;
+    --ink-soft: #4A4D47;
+    --line: #DEDCD5;
+    --accent: #1F4B43;
+    --accent-soft: #E7EDE9;
+    --gold: #9C8355;
+    --gold-soft: #F1ECE1;
+    --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+    --serif: 'Source Serif', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+  }
+
+  @media (max-width: 860px) {
+    body { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- Sidebar ---------- */
+
+  .sidebar {
+    background: var(--bg-raised);
+    border-right: 1px solid var(--line);
+    padding: 32px 24px 40px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  @media (max-width: 860px) {
+    .sidebar {
+      position: relative;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+    }
+  }
+
+  .brand {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .brand-mark {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  .brand-title {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--accent);
+  }
+
+  .brand-sub {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .nav-group-label {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    opacity: 0.7;
+    margin: 18px 0 6px;
+  }
+
+  .nav-group-label:first-child { margin-top: 0; }
+
+  .nav-item {
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+    padding: 7px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 13.5px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    font-family: var(--sans);
+    line-height: 1.3;
+  }
+
+  .nav-item:hover { background: var(--gold-soft); color: var(--ink); }
+
+  .nav-item.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .nav-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gold);
+    flex-shrink: 0;
+    min-width: 16px;
+  }
+
+  .nav-item.active .nav-num { color: var(--accent); }
+
+  /* ---------- Main ---------- */
+
+  main {
+    padding: 56px 48px 120px;
+    max-width: 760px;
+  }
+
+  @media (max-width: 860px) {
+    main { padding: 36px 24px 100px; }
+  }
+
+  .doc { display: none; }
+  .doc.active { display: block; }
+
+  .doc-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .doc h1 {
+    font-family: var(--serif);
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 1.18;
+    color: var(--accent);
+    margin: 0 0 28px;
+    text-wrap: balance;
+    padding-bottom: 22px;
+    border-bottom: 2px solid var(--accent);
+  }
+
+  .doc h2 {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 40px 0 14px;
+    text-wrap: balance;
+  }
+
+  .doc h2:first-of-type { margin-top: 0; }
+
+  .doc h3 {
+    font-family: var(--sans);
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 26px 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .doc p {
+    font-size: 15.5px;
+    line-height: 1.68;
+    color: var(--ink);
+    margin: 0 0 16px;
+    max-width: 62ch;
+  }
+
+  .doc ul, .doc ol {
+    margin: 0 0 18px;
+    padding-left: 22px;
+    font-size: 15.5px;
+    line-height: 1.65;
+    max-width: 62ch;
+  }
+
+  .doc li { margin-bottom: 8px; }
+  .doc li::marker { color: var(--gold); }
+
+  .doc strong { color: var(--accent); font-weight: 700; }
+
+  .doc a { color: var(--accent); text-decoration-color: var(--gold); text-underline-offset: 3px; }
+  .doc a:hover { text-decoration-color: var(--accent); }
+
+  blockquote {
+    margin: 20px 0;
+    padding: 12px 18px;
+    background: var(--gold-soft);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+
+  blockquote p { margin: 0; font-size: 14px; color: var(--ink-soft); }
+
+  /* tables */
+  .table-wrap { overflow-x: auto; margin: 4px 0 24px; border: 1px solid var(--line); border-radius: 8px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: var(--bg-raised);
+  }
+
+  th {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    background: var(--accent-soft);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--line);
+    line-height: 1.5;
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; }
+
+  .status-pendente { background: #F3E6DC; color: #8A4A1F; }
+  .status-pendente::before { background: #C97A3A; }
+
+  .status-andamento { background: #E4EDF5; color: #1F4E8A; }
+  .status-andamento::before { background: #3A79C9; }
+
+  /* index cards */
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 24px 0 8px;
+  }
+
+  @media (max-width: 600px) { .card-grid { grid-template-columns: 1fr; } }
+
+  .card {
+    display: block;
+    border: 1px solid var(--line);
+    background: var(--bg-raised);
+    border-radius: 10px;
+    padding: 16px 18px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .card:hover { border-color: var(--gold); background: var(--gold-soft); }
+
+  .card-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gold);
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .card-title {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1.3;
+  }
+
+  footer.doc-foot {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    font-family: var(--mono);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* ---------- Doc meta block ---------- */
+
+  .doc-meta {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 24px;
+    margin-bottom: 32px;
+    padding: 16px 20px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+
+  @media (max-width: 640px) {
+    .doc-meta { grid-template-columns: 1fr 1fr; }
+  }
+
+  .doc-meta dt {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    opacity: 0.75;
+    margin-bottom: 3px;
+  }
+
+  .doc-meta dd {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .classification {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: #8A4A1F;
+  }
+
+  .classification::before { content: '●'; font-size: 8px; color: #C97A3A; }
+
+  /* ---------- Source tags ---------- */
+
+  .src {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.03em;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-left: 6px;
+    white-space: nowrap;
+    vertical-align: 1px;
+  }
+
+  .src-ata { background: var(--accent-soft); color: var(--accent); }
+  .src-plano { background: var(--gold-soft); color: #7A6339; }
+
+  /* ---------- Provenance banner ---------- */
+
+  .provenance {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0 0 32px;
+    padding: 12px 16px;
+    background: var(--accent);
+    color: #FFFFFF;
+    border-radius: 8px;
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+
+  .provenance strong { color: #FFFFFF; }
+
+  /* ---------- Cover ---------- */
+
+  .cover {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 28px 0 8px;
+  }
+
+  .cover-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .cover-title {
+    font-family: var(--serif);
+    font-size: 42px;
+    line-height: 1.12;
+    font-weight: 600;
+    color: var(--accent);
+    text-wrap: balance;
+    max-width: 14ch;
+  }
+
+  .cover-dek {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 56ch;
+  }
+
+  .cover-meta-row {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+</style>
+</head>
+
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark">Facilita &amp; SL Investe</span>
+      <span class="brand-title">Biblioteca de Conhecimento</span>
+      <span class="brand-sub">Transição estratégica — compra, venda e locação de veículos</span>
+    </div>
+    <nav id="nav"></nav>
+  </aside>
+
+  <main id="main"></main>
+
+  <script>
+    const docs = [
+      {
+        id: 'indice',
+        num: '00',
+        group: 'Início',
+        title: 'Índice',
+        html: `
+          <div class="cover">
+            <span class="cover-tag">Biblioteca de Conhecimento · Governança Estratégica</span>
+            <h1 class="cover-title" style="border:none; padding:0; margin:0;">Facilita &amp; SL Investe</h1>
+            <p class="cover-dek">Registro consolidado da transição de modelo de negócio do grupo — da negociação de dívidas de pessoas físicas para a operação de compra, venda e locação de veículos com opção de compra. Compilado a partir da reunião estratégica de fundação e do Master Plan Estratégico V3.</p>
+            <dl class="cover-meta-row">
+              <div><dt style="font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);opacity:.75;margin-bottom:3px;">Classificação</dt><dd class="classification" style="font-size:13px;">Confidencial — uso interno</dd></div>
+              <div><dt style="font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);opacity:.75;margin-bottom:3px;">Versão</dt><dd style="font-size:13px;font-weight:600;">1.0</dd></div>
+              <div><dt style="font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);opacity:.75;margin-bottom:3px;">Data de emissão</dt><dd style="font-size:13px;font-weight:600;">03/07/2026</dd></div>
+              <div><dt style="font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);opacity:.75;margin-bottom:3px;">Distribuição</dt><dd style="font-size:13px;font-weight:600;">Sócios &amp; parceiros jurídicos</dd></div>
+            </dl>
+          </div>
+
+          <h2>Sumário</h2>
+          <div class="card-grid" id="index-cards"></div>
+
+          <h2>Fontes e proveniência</h2>
+          <p>Cada seção deste documento indica sua origem com uma etiqueta: <span class="src src-ata">ATA</span> para decisões e fatos registrados na reunião estratégica, e <span class="src src-plano">MASTER PLAN V3</span> para especificações formalizadas no Master Plan Estratégico. Onde os dois se complementam, ambas as etiquetas aparecem.</p>
+          <ul>
+            <li><strong>Ata da reunião estratégica</strong> — registrada em 03/07/2026. Fonte primária das decisões de mudança de modelo, transição de gestão e plano de ação.</li>
+            <li><strong>Master Plan Estratégico: Projeto Facilita &amp; SL Investe — V3</strong> — documento formal que detalha a estrutura societária/tributária (UDC Participações, Assessoria Facilita, Mobcar Veículos), o modelo de remuneração jurídica em 3 camadas do Dr. Ramon Nunes, e o modelo operacional completo. Tratado aqui como fonte de especificação técnica/societária.</li>
+          </ul>
+
+          <h2>Governança do documento</h2>
+          <ul>
+            <li>Ao final de cada reunião estratégica, registrar as decisões novas e atualizar os documentos temáticos relevantes, preservando as etiquetas de fonte.</li>
+            <li>Quando o Master Plan for atualizado para uma V4+, revisar as referências cruzadas nesta biblioteca e incrementar a versão do documento.</li>
+            <li>Manter o <a data-nav="plano">Plano de Ação</a> como o documento "vivo" de status das tarefas — é a única seção com estado mutável frequente.</li>
+          </ul>
+        `
+      },
+      {
+        id: 'modelo',
+        num: '01',
+        group: 'Estratégia',
+        title: 'Mudança de Modelo de Negócio',
+        html: `
+          <div class="doc-eyebrow">Estratégia · 01</div>
+          <h1>Mudança no Modelo de Negócio</h1>
+          <dl class="doc-meta">
+            <div><dt>Fonte primária</dt><dd><span class="src src-ata">ATA</span></dd></div>
+            <div><dt>Status</dt><dd>Decisão validada</dd></div>
+            <div><dt>Impacto</dt><dd>Core do negócio</dd></div>
+            <div><dt>Revisão</dt><dd>03/07/2026</dd></div>
+          </dl>
+
+          <h2>Decisão</h2>
+          <p>Migração <strong>definitiva</strong> do serviço tradicional de negociação de dívidas para pessoas físicas (CPF) para um modelo focado em <strong>compra, venda e locação de veículos com opção de compra</strong>.</p>
+
+          <h2>Motivação</h2>
+          <ul>
+            <li>A venda de serviços de negociação de dívida a CPFs gerava <strong>margens baixas</strong>.</li>
+            <li>O modelo antigo tinha <strong>alta complexidade operacional</strong> (volume de casos individuais, baixo ticket, gestão intensiva).</li>
+            <li>O novo modelo usa um ativo físico (o veículo) como garantia e alavanca de recuperação rápida, reduzindo a dependência de processos judiciais longos.</li>
+          </ul>
+
+          <h2>Nova tese de negócio</h2>
+          <p>O grupo passa a operar como um ecossistema de três frentes complementares:</p>
+          <ul>
+            <li><strong>Captação</strong> — identificação de veículos financiados por pessoas endividadas em bancos com histórico de cláusulas abusivas.</li>
+            <li><strong>Jurídico</strong> — uso de teses revisionais para "limpar" o ativo (retirar a mora, liberar o carro) rapidamente.</li>
+            <li><strong>Operação de ativos</strong> — compra, venda, intermediação e locação com opção de compra dos veículos já "limpos" juridicamente.</li>
+          </ul>
+          <blockquote><p>Ver também: <a data-nav="juridico">Estrutura Jurídica e Tese Legal</a>, <a data-nav="locacao">Modelo de Locação com Opção de Compra</a>.</p></blockquote>
+
+          <h2>Relação com o Master Plan V3</h2>
+          <p>O Master Plan já formaliza essa mudança em uma estrutura societária de três empresas (o "Tripé Empresarial e Fiscal"):</p>
+          <div class="table-wrap"><table>
+            <tr><th>Empresa</th><th>Papel</th></tr>
+            <tr><td><strong>UDC Participações LTDA</strong></td><td>Holding patrimonial — detém as cotas, centraliza capital, distribui lucros com isenção de IRPF</td></tr>
+            <tr><td><strong>Assessoria Facilita LTDA</strong></td><td>Marketing, atendimento, captação e gestão do passivo dos ~180 contratos antigos</td></tr>
+            <tr><td><strong>Mobcar Veículos LTDA</strong></td><td>Operadora de ativos — compra, venda, consignação e locação dos veículos</td></tr>
+          </table></div>
+          <p>Essa estrutura é a implementação prática da decisão de mudança de modelo discutida em reunião.</p>
+        `
+      },
+      {
+        id: 'juridico',
+        num: '02',
+        group: 'Estratégia',
+        title: 'Estrutura Jurídica e Tese Legal',
+        html: `
+          <div class="doc-eyebrow">Estratégia · 02</div>
+          <h1>Estrutura Jurídica e Tese Legal</h1>
+          <dl class="doc-meta">
+            <div><dt>Fonte primária</dt><dd><span class="src src-ata">ATA</span> <span class="src src-plano">PLANO V3</span></dd></div>
+            <div><dt>Status</dt><dd>Em execução</dd></div>
+            <div><dt>Responsável</dt><dd>Ramon Nunes</dd></div>
+            <div><dt>Revisão</dt><dd>03/07/2026</dd></div>
+          </dl>
+
+          <h2>Centralização em Santa Catarina</h2>
+          <p>A operação jurídica será <strong>concentrada em Santa Catarina</strong>, devido à:</p>
+          <ul>
+            <li><strong>Celeridade e eficiência</strong> do sistema judiciário estadual bancário.</li>
+            <li>Existência de <strong>varas especializadas</strong> em direito bancário no estado.</li>
+          </ul>
+
+          <h2>Tese jurídica central</h2>
+          <ol>
+            <li>Identificar <strong>cláusulas abusivas</strong> nos contratos de financiamento — foco em <strong>capitalização diária</strong> de juros.</li>
+            <li>Atuar com <strong>ações revisionais por dependência</strong>, apresentadas <strong>após</strong> a ação de busca e apreensão movida pelo banco.</li>
+            <li>O objetivo processual é conseguir <strong>suspender a mora</strong> do devedor.</li>
+            <li>Resultado prático: o nome do devedor original é limpo e o veículo é liberado em <strong>até 30 dias</strong>.</li>
+          </ol>
+          <blockquote><p>No Master Plan V3 esse mecanismo é descrito com mais detalhe técnico: a Facilita capta o veículo via <strong>Cessão de Direitos + Procuração</strong>; espera-se que o banco ajuíze a Busca e Apreensão; o jurídico contra-ataca com a Revisional alegando <strong>Mora do Credor</strong> (juros abusivos prévios).</p></blockquote>
+
+          <h2>Bancos-alvo prioritários</h2>
+          <p>Bancos financiadores com maior incidência de cláusulas abusivas, usados como critério de triagem comercial:</p>
+          <ul>
+            <li><strong>BV</strong></li>
+            <li><strong>PAN</strong></li>
+            <li><strong>Omni (OMN)</strong></li>
+            <li>Santander (citado no Master Plan V3 como banco de "altas taxas")</li>
+          </ul>
+
+          <h2>Estudo de viabilidade SP vs. SC</h2>
+          <ul>
+            <li>Responsável: <strong>Ramon Nunes</strong>.</li>
+            <li>Objetivo: comparar o <strong>tempo de resposta de liminares em São Paulo</strong> com o benchmark já validado em Santa Catarina, para avaliar expansão da operação jurídica.</li>
+            <li>Status: <span class="status status-andamento">em andamento</span> — ver <a data-nav="plano">Plano de Ação</a>.</li>
+          </ul>
+
+          <h2>Modelo de remuneração jurídica (Dr. Ramon Nunes)</h2>
+          <p>Detalhado no Master Plan V3 — modelo de 3 camadas, já que Ramon atua como parceiro jurídico master fora do quadro societário de cotas:</p>
+          <ol>
+            <li><strong>Retainer mensal (taxa fixa)</strong> — cobre custos operacionais do escritório na manutenção dos ~180 processos/contratos do passivo antigo.</li>
+            <li><strong>Honorários de sucumbência (direito integral)</strong> — 100% dos honorários arbitrados pelo juiz nas ações revisionais e defesas contra bancos pertencem ao escritório do Dr. Ramon.</li>
+            <li><strong>Success fee operacional</strong> — bônus por performance atrelado ao desembaraço do ativo: cada vez que o jurídico derruba o Renajud/Busca e Apreensão e libera o carro para a Mobcar operar, é pago um prêmio (valor fixo por placa ou percentual sobre o lucro líquido gerado por aquele carro).</li>
+          </ol>
+
+          <h2>Oportunidade futura: compra de precatórios / ativos judiciais</h2>
+          <p>Uso do capital da <strong>SL Investe</strong>, combinado com o mapeamento do jurídico, para <strong>comprar processos já ajuizados contra bancos</strong> (casos de perda do veículo com causa ganha para indenização material/moral). A empresa assume o polo ativo da ação com deságio e recebe o alvará judicial — linha de negócio de alta lucratividade, ainda não operacionalizada.</p>
+        `
+      },
+      {
+        id: 'locacao',
+        num: '03',
+        group: 'Estratégia',
+        title: 'Locação com Opção de Compra',
+        html: `
+          <div class="doc-eyebrow">Estratégia · 03</div>
+          <h1>Modelo de Locação com Opção de Compra</h1>
+          <dl class="doc-meta">
+            <div><dt>Fonte primária</dt><dd><span class="src src-ata">ATA</span> <span class="src src-plano">PLANO V3</span></dd></div>
+            <div><dt>Status</dt><dd>Decisão validada</dd></div>
+            <div><dt>Operadora</dt><dd>Mobcar Veículos LTDA</dd></div>
+            <div><dt>Revisão</dt><dd>03/07/2026</dd></div>
+          </dl>
+
+          <h2>Por que esse modelo venceu</h2>
+          <p>O grupo convergiu para a locação com opção de compra como formato comercial principal por dois motivos:</p>
+          <ol>
+            <li><strong>Retomada rápida do ativo em caso de inadimplência</strong> — via rastreadores + quebra contratual, sem precisar arrastar processos judiciais demorados (como uma reintegração de posse civil tradicional).</li>
+            <li><strong>Alternativa de acesso ao crédito</strong> — atende clientes <strong>sem score suficiente</strong> para financiamento bancário tradicional.</li>
+          </ol>
+
+          <h2>Mecanismo de segurança jurídica</h2>
+          <p>Como a Mobcar atua formalmente como <strong>locadora oficial</strong>, o não pagamento pelo cliente configura o crime de <strong>Apropriação Indébita</strong>, e não um mero inadimplemento civil. Isso permite:</p>
+          <ul>
+            <li>Retomada <strong>imediata</strong> do veículo via rastreador + acionamento policial.</li>
+            <li>Eliminação da demora típica de uma ação de reintegração de posse civil.</li>
+          </ul>
+
+          <h2>Outras vias de escoamento do ativo</h2>
+          <p>Além da locação com opção de compra, a Mobcar opera dois outros canais:</p>
+          <ul>
+            <li><strong>Venda B2B / Atacado</strong> — repasse de lotes de veículos para frotistas e parceiros de confiança, com quitação em 12/18 meses. Gera caixa imediato (30–40 dias).</li>
+            <li><strong>Intermediação pura (risco zero)</strong> — Mobcar conecta comprador e vendedor sem colocar o ativo no próprio balanço, ganhando apenas na comissão.</li>
+          </ul>
+
+          <h2>Estratégia de frotista Zero KM ("Operação Localiza")</h2>
+          <ul>
+            <li>A Mobcar, por ser locadora constituída, pode comprar frotas de veículos <strong>0 km direto das montadoras</strong> com descontos agressivos (10% a 25%).</li>
+            <li>Ciclo: aluga o carro por 12 meses (cumprindo a regra do ICMS aplicável), pagando as parcelas com a receita do próprio aluguel; ao final, vende no mercado de seminovos a preço de Tabela FIPE, gerando lucro direto ("lucro na compra").</li>
+          </ul>
+
+          <h2>Próximos passos definidos em reunião</h2>
+          <p>Usar a <strong>imersão estratégica</strong> do evento "Sem Leilão" (ver <a data-nav="plano">Plano de Ação</a>) para <strong>desenhar e formalizar</strong> os novos formatos contratuais de locação com opção de compra e as parcerias com frotistas.</p>
+
+          <blockquote><p>Ver também: <a data-nav="juridico">Estrutura Jurídica e Tese Legal</a> para o mecanismo de "limpeza" do ativo antes de entrar neste fluxo de locação.</p></blockquote>
+        `
+      },
+      {
+        id: 'transicao',
+        num: '04',
+        group: 'Governança',
+        title: 'Transição de Gestão e Passivos',
+        html: `
+          <div class="doc-eyebrow">Governança · 04</div>
+          <h1>Transição de Gestão e Passivos</h1>
+          <dl class="doc-meta">
+            <div><dt>Fonte primária</dt><dd><span class="src src-ata">ATA</span></dd></div>
+            <div><dt>Status</dt><dd class="classification">Urgente</dd></div>
+            <div><dt>Responsáveis</dt><dd>C. Lopes, R. Nunes</dd></div>
+            <div><dt>Revisão</dt><dd>03/07/2026</dd></div>
+          </dl>
+
+          <h2>Saída de Nilson</h2>
+          <ul>
+            <li><strong>Nilson</strong> está saindo da marca e da estrutura da Facilita.</li>
+            <li><strong>Cristiano Lopes</strong> e <strong>Ramon Nunes</strong> formalizarão a transferência de encargos.</li>
+            <li>Ação urgente: <strong>documentar juridicamente</strong> a transferência total de responsabilidades, marcas e encargos da empresa de Nilson para Cristiano Lopes.</li>
+          </ul>
+
+          <h2>Risco mapeado: os 180 contratos pendentes</h2>
+          <ul>
+            <li>Existem cerca de <strong>180 contratos</strong> pendentes da gestão anterior (negociação de dívida, modelo antigo).</li>
+            <li>Risco: se não forem tratados, podem gerar <strong>novos processos contra a empresa</strong>.</li>
+            <li>Ação: força-tarefa para <strong>auditar e dar andamento</strong> a esses contratos antes de abrir novas frentes comerciais, sob liderança jurídica de <strong>Ramon Nunes</strong>.</li>
+            <li>No Master Plan V3, a gestão desse passivo é atribuída formalmente à <strong>Assessoria Facilita LTDA</strong>, e o retainer mensal do Dr. Ramon cobre justamente a manutenção desses ~180 processos.</li>
+          </ul>
+
+          <h2>Por que isso é prioridade</h2>
+          <p>O grupo definiu explicitamente que a contenção dos 180 contratos deve acontecer <strong>antes</strong> de abrir novas frentes comerciais — é o item mais urgente do plano de transição (ver <a data-nav="plano">Plano de Ação</a>, seção 1).</p>
+        `
+      },
+      {
+        id: 'financeiro',
+        num: '05',
+        group: 'Governança',
+        title: 'Saúde Financeira e Ativos',
+        html: `
+          <div class="doc-eyebrow">Governança · 05</div>
+          <h1>Saúde Financeira e Ativos do Grupo</h1>
+          <dl class="doc-meta">
+            <div><dt>Fonte primária</dt><dd><span class="src src-ata">ATA</span></dd></div>
+            <div><dt>Status</dt><dd>Referência</dd></div>
+            <div><dt>Horizonte</dt><dd>12 meses</dd></div>
+            <div><dt>Revisão</dt><dd>03/07/2026</dd></div>
+          </dl>
+
+          <h2>Passivos residuais</h2>
+          <ul>
+            <li>Estimativa de <strong>R$ 15 mil</strong> em passivos trabalhistas residuais.</li>
+          </ul>
+
+          <h2>Ativos valiosos (prova social e relacionamento)</h2>
+          <ul>
+            <li><strong>Relacionamento sólido com grandes bancos</strong>.</li>
+            <li>Mais de <strong>R$ 20 milhões</strong> em volumes já negociados historicamente — funciona como prova social robusta para negociação e credibilidade de mercado.</li>
+          </ul>
+
+          <h2>Estratégia de caixa</h2>
+          <p><strong>Foco inicial:</strong> garantir caixa para os <strong>primeiros 12 meses</strong> de operação antes de esperar retorno financeiro relevante das quitações/operações do novo modelo.</p>
+          <p>Isso reforça a importância dos canais de <strong>giro rápido de caixa</strong> descritos no Master Plan V3 (venda B2B/atacado em 30–40 dias) como complemento à locação com opção de compra, que tem retorno mais distribuído no tempo.</p>
+
+          <blockquote><p>Ver também: <a data-nav="locacao">Modelo de Locação com Opção de Compra</a> para os canais de monetização e seus prazos de retorno.</p></blockquote>
+        `
+      },
+      {
+        id: 'plano',
+        num: '06',
+        group: 'Execução',
+        title: 'Plano de Ação e Tarefas',
+        html: `
+          <div class="doc-eyebrow">Execução · 06</div>
+          <h1>Plano de Ação e Tarefas</h1>
+          <dl class="doc-meta">
+            <div><dt>Fonte primária</dt><dd><span class="src src-ata">ATA</span></dd></div>
+            <div><dt>Status</dt><dd>Documento vivo</dd></div>
+            <div><dt>Itens abertos</dt><dd>8</dd></div>
+            <div><dt>Revisão</dt><dd>03/07/2026</dd></div>
+          </dl>
+          <div class="provenance">Este é o único documento da biblioteca com estado mutável frequente. Atualize as colunas de status diretamente conforme as tarefas avançam — as demais seções são registros de decisão e mudam apenas quando a estratégia muda.</div>
+
+          <h2>1. Transição Corporativa e Mitigação de Riscos <span style="color:var(--gold); font-family:var(--mono); font-size:13px; text-transform:none; letter-spacing:0;">— urgente</span></h2>
+          <div class="table-wrap"><table>
+            <tr><th>Tarefa</th><th>Responsável(is)</th><th>Status</th></tr>
+            <tr><td>Formalizar acordo com Nilson (transferência jurídica total de responsabilidades, marcas e encargos para Cristiano Lopes)</td><td>Cristiano Lopes, Ramon Nunes</td><td><span class="status status-pendente">pendente</span></td></tr>
+            <tr><td>Plano de contenção dos 180 contratos (força-tarefa de auditoria e andamento antes de novas frentes comerciais)</td><td>Ramon Nunes (liderança jurídica)</td><td><span class="status status-pendente">pendente</span></td></tr>
+          </table></div>
+          <p>Ver <a data-nav="transicao">Transição de Gestão e Passivos</a>.</p>
+
+          <h2>2. Operações Jurídicas e Triagem Comercial</h2>
+          <div class="table-wrap"><table>
+            <tr><th>Tarefa</th><th>Responsável(is)</th><th>Status</th></tr>
+            <tr><td>Estudo de viabilidade SP vs. SC (tempo de resposta de liminares em SP vs. benchmark de SC)</td><td>Ramon Nunes</td><td><span class="status status-andamento">em andamento</span></td></tr>
+            <tr><td>Parametrização de tráfego e marketing (filtrar clientes financiados por bancos-alvo: BV, PAN, Omni)</td><td>Time de marketing/tráfego</td><td><span class="status status-pendente">pendente</span></td></tr>
+          </table></div>
+          <p>Ver <a data-nav="juridico">Estrutura Jurídica e Tese Legal</a>.</p>
+
+          <h2>3. Infraestrutura Tecnológica e Controle de Ativos</h2>
+          <div class="table-wrap"><table>
+            <tr><th>Tarefa</th><th>Responsável(is)</th><th>Status</th></tr>
+            <tr><td>Integração com SERPRO (monitoramento de multas e pontuação de CNH em tempo real, delay 2h–4h)</td><td>Time de tecnologia</td><td><span class="status status-pendente">pendente</span></td></tr>
+            <tr><td>Aprimoramento do sistema interno (integrar sistema de monitoramento de mudança de endereço/processos de Ramon ao braço de tecnologia liderado por L T)</td><td>Ramon Nunes, L T</td><td><span class="status status-pendente">pendente</span></td></tr>
+          </table></div>
+          <p>Ver <a data-nav="tecnologia">Infraestrutura Tecnológica</a>.</p>
+
+          <h2>4. Imersão Estratégica <span style="color:var(--gold); font-family:var(--mono); font-size:13px; text-transform:none; letter-spacing:0;">— próximos dias</span></h2>
+          <div class="table-wrap"><table>
+            <tr><th>Tarefa</th><th>Responsável(is)</th><th>Status</th></tr>
+            <tr><td>Logística do evento "Sem Leilão" em Alphaville (confirmar presença, organizar ida; Ramon Nunes palestrará)</td><td>Cristiano Lopes, Diego Barboza (execução); L T, Lucas (apoio)</td><td><span class="status status-pendente">pendente</span></td></tr>
+            <tr><td>Desenho de propostas de negócio (formalizar novos formatos contratuais de locação com opção de compra e parcerias com frotistas) durante a imersão</td><td>Grupo todo</td><td><span class="status status-pendente">pendente</span></td></tr>
+          </table></div>
+          <p>Ver <a data-nav="locacao">Modelo de Locação com Opção de Compra</a>.</p>
+
+          <h2>Notas de acompanhamento</h2>
+          <ul>
+            <li>Atualize a coluna "Status" (Pendente / Em andamento / Concluído / Bloqueado) conforme as tarefas evoluem.</li>
+            <li>Ao concluir uma tarefa, considere registrar a data e um link para o documento/decisão gerada (ex.: contrato assinado, relatório do estudo SP vs. SC).</li>
+          </ul>
+        `
+      },
+      {
+        id: 'tecnologia',
+        num: '07',
+        group: 'Execução',
+        title: 'Infraestrutura Tecnológica',
+        html: `
+          <div class="doc-eyebrow">Execução · 07</div>
+          <h1>Infraestrutura Tecnológica e Controle de Ativos</h1>
+          <dl class="doc-meta">
+            <div><dt>Fonte primária</dt><dd><span class="src src-ata">ATA</span> <span class="src src-plano">PLANO V3</span></dd></div>
+            <div><dt>Status</dt><dd>Pendente</dd></div>
+            <div><dt>Responsável</dt><dd>L T</dd></div>
+            <div><dt>Revisão</dt><dd>03/07/2026</dd></div>
+          </dl>
+
+          <h2>Integração com SERPRO</h2>
+          <ul>
+            <li>Objetivo: automatizar o <strong>monitoramento de multas e pontuação de CNH</strong> dos locatários em tempo real.</li>
+            <li>Delay esperado: <strong>2h a 4h</strong> entre a ocorrência e a leitura pela integração.</li>
+            <li>Finalidade: permitir o <strong>repasse imediato</strong> de responsabilidade civil e criminal aos locatários (o veículo está em nome/CNPJ da Mobcar, então é essencial identificar o condutor infrator rapidamente).</li>
+          </ul>
+          <blockquote><p>No Master Plan V3, esse ponto é detalhado como integração via <strong>API com agregadores de mercado</strong> (ex.: Infosimples, Cobli), conectados ao SERPRO e Detrans — as multas são lidas instantaneamente para que a <strong>Indicação de Condutor</strong> seja feita dentro do prazo legal, evitando a incidência da <strong>Multa NIC</strong> contra o CNPJ da Mobcar.</p></blockquote>
+
+          <h2>Aprimoramento do sistema interno</h2>
+          <ul>
+            <li>Ramon Nunes desenvolveu um <strong>sistema de monitoramento de mudanças de endereço e processos</strong>.</li>
+            <li>Ação definida: integrar esse sistema ao <strong>braço de tecnologia e desenvolvimento</strong>, liderado por <strong>L T</strong>.</li>
+          </ul>
+
+          <h2>Retaguarda de gestão</h2>
+          <p><strong>Treinamento comercial</strong> — criação de FAQ e cartilhas rígidas para o time de captação da Facilita, garantindo transparência com o cliente sobre o fato de que o nome ficará negativado temporariamente durante o processo, para evitar distratos e problemas de imagem.</p>
+
+          <blockquote><p>Ver também: <a data-nav="plano">Plano de Ação</a>, seção 3.</p></blockquote>
+        `
+      },
+      {
+        id: 'pessoas',
+        num: '08',
+        group: 'Referência',
+        title: 'Pessoas e Papéis',
+        html: `
+          <div class="doc-eyebrow">Referência · 08</div>
+          <h1>Pessoas e Papéis</h1>
+          <dl class="doc-meta">
+            <div><dt>Fonte primária</dt><dd><span class="src src-ata">ATA</span></dd></div>
+            <div><dt>Status</dt><dd>Referência</dd></div>
+            <div><dt>Pessoas</dt><dd>6</dd></div>
+            <div><dt>Revisão</dt><dd>03/07/2026</dd></div>
+          </dl>
+          <div class="table-wrap"><table>
+            <tr><th>Nome</th><th>Papel / Frente</th></tr>
+            <tr><td><strong>Cristiano Lopes</strong></td><td>Recebe a transferência total de marcas/encargos da Facilita (saída de Nilson); logística do evento "Sem Leilão"</td></tr>
+            <tr><td><strong>Ramon Nunes (Dr. Ramon)</strong></td><td>Liderança jurídica; parceiro jurídico master (fora do quadro societário); estudo de viabilidade SP vs. SC; força-tarefa dos 180 contratos; desenvolveu o sistema de monitoramento de endereço/processos; palestrará no evento "Sem Leilão"</td></tr>
+            <tr><td><strong>Nilson</strong></td><td>Saindo da marca e estrutura da Facilita — transição de encargos em formalização</td></tr>
+            <tr><td><strong>Diego Barboza</strong></td><td>Logística/organização do evento "Sem Leilão"</td></tr>
+            <tr><td><strong>L T</strong></td><td>Lidera o braço de tecnologia e desenvolvimento; apoio na garantia de convites adicionais para o evento</td></tr>
+            <tr><td><strong>Lucas</strong></td><td>Apoio na garantia de convites adicionais para o evento "Sem Leilão"</td></tr>
+          </table></div>
+
+          <h2>Observação</h2>
+          <p>Os nomes e papéis acima refletem o que foi mencionado no resumo da reunião. Caso existam sobrenomes completos, CPFs/CNPJs ou participações societárias formais, complementar via o Master Plan V3 ou documentos societários oficiais (contratos sociais, acordos de sócios).</p>
+        `
+      },
+      {
+        id: 'glossario',
+        num: '09',
+        group: 'Referência',
+        title: 'Glossário de Termos',
+        html: `
+          <div class="doc-eyebrow">Referência · 09</div>
+          <h1>Glossário de Termos</h1>
+          <dl class="doc-meta">
+            <div><dt>Fonte primária</dt><dd><span class="src src-ata">ATA</span> <span class="src src-plano">PLANO V3</span></dd></div>
+            <div><dt>Status</dt><dd>Referência</dd></div>
+            <div><dt>Termos</dt><dd>11</dd></div>
+            <div><dt>Revisão</dt><dd>03/07/2026</dd></div>
+          </dl>
+
+          <h3>Ação revisional</h3>
+          <p>Ação judicial movida pelo devedor (ou por quem assumiu seus direitos via cessão) para revisar cláusulas de um contrato de financiamento, geralmente alegando abusividade nos encargos.</p>
+
+          <h3>Ação revisional por dependência</h3>
+          <p>Ação revisional ajuizada como processo dependente/conexo a uma ação de busca e apreensão já em curso, permitindo tramitação vinculada e mais rápida.</p>
+
+          <h3>Apropriação Indébita</h3>
+          <p>Crime configurado quando alguém se apropria de bem que deveria devolver (ex.: um bem alugado). No modelo de locação com opção de compra, o não pagamento pelo locatário é enquadrado como apropriação indébita, permitindo retomada mais rápida do veículo do que em uma ação civil comum.</p>
+
+          <h3>Busca e Apreensão</h3>
+          <p>Ação judicial usada por instituições financeiras para retomar um veículo financiado em caso de inadimplência do financiado original.</p>
+
+          <h3>Capitalização diária (juros)</h3>
+          <p>Prática de calcular juros sobre juros diariamente; frequentemente contestada judicialmente como cláusula abusiva em contratos de financiamento veicular.</p>
+
+          <h3>Cessão de Direitos</h3>
+          <p>Contrato pelo qual o devedor original transfere a um terceiro (a empresa) os direitos e obrigações relativos ao veículo financiado, geralmente acompanhado de procuração.</p>
+
+          <h3>Mora do Credor</h3>
+          <p>Tese jurídica segundo a qual o próprio credor (banco) estaria em situação irregular (ex.: por cobrar juros abusivos previamente), o que pode ser usado para suspender a mora do devedor.</p>
+
+          <h3>Multa NIC</h3>
+          <p>Multa aplicada por Não Indicação do Condutor infrator dentro do prazo legal — risco relevante para uma locadora de veículos (o CNPJ da empresa responde caso não indique o condutor a tempo).</p>
+
+          <h3>Renajud</h3>
+          <p>Sistema do Poder Judiciário que permite o registro de restrições judiciais sobre veículos (bloqueio, penhora, etc.) diretamente nas bases de trânsito (Detran).</p>
+
+          <h3>SERPRO</h3>
+          <p>Serviço Federal de Processamento de Dados — órgão que fornece bases de dados públicas (incluindo dados de trânsito) utilizadas para integrações de monitoramento de multas e CNH.</p>
+
+          <h3>Success fee</h3>
+          <p>Remuneração variável condicionada ao sucesso de um resultado específico (ex.: liberação de um veículo em disputa judicial).</p>
+
+          <blockquote><p>Ver também: <a data-nav="juridico">Estrutura Jurídica e Tese Legal</a>, <a data-nav="locacao">Modelo de Locação com Opção de Compra</a>, <a data-nav="tecnologia">Infraestrutura Tecnológica</a>.</p></blockquote>
+        `
+      }
+    ];
+
+    const nav = document.getElementById('nav');
+    const mainEl = document.getElementById('main');
+    const groups = [];
+    docs.forEach(d => { if (!groups.includes(d.group)) groups.push(d.group); });
+
+    groups.forEach(group => {
+      const label = document.createElement('div');
+      label.className = 'nav-group-label';
+      label.textContent = group;
+      nav.appendChild(label);
+      docs.filter(d => d.group === group).forEach(d => {
+        const btn = document.createElement('button');
+        btn.className = 'nav-item';
+        btn.dataset.id = d.id;
+        btn.innerHTML = `<span class="nav-num">${d.num}</span><span>${d.title}</span>`;
+        btn.addEventListener('click', () => navigate(d.id));
+        nav.appendChild(btn);
+      });
+    });
+
+    docs.forEach(d => {
+      const section = document.createElement('article');
+      section.className = 'doc';
+      section.id = 'doc-' + d.id;
+      section.innerHTML = d.html + `<footer class="doc-foot"><span>Facilita &amp; SL Investe — Biblioteca de Conhecimento · Documento ${d.num} · v1.0</span><span class="classification">Confidencial — uso interno</span></footer>`;
+      mainEl.appendChild(section);
+    });
+
+    const cardsWrap = document.getElementById('index-cards');
+    docs.filter(d => d.id !== 'indice').forEach(d => {
+      const card = document.createElement('a');
+      card.className = 'card';
+      card.innerHTML = `<span class="card-num">${d.num}</span><span class="card-title">${d.title}</span>`;
+      card.addEventListener('click', () => navigate(d.id));
+      cardsWrap.appendChild(card);
+    });
+
+    function navigate(id) {
+      document.querySelectorAll('.doc').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+      const target = document.getElementById('doc-' + id);
+      if (target) target.classList.add('active');
+      const navBtn = document.querySelector(`.nav-item[data-id="${id}"]`);
+      if (navBtn) navBtn.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      history.replaceState(null, '', '#' + id);
+    }
+
+    document.body.addEventListener('click', e => {
+      const a = e.target.closest('[data-nav]');
+      if (a) { e.preventDefault(); navigate(a.dataset.nav); }
+    });
+
+    const initial = location.hash ? location.hash.slice(1) : 'indice';
+    navigate(docs.some(d => d.id === initial) ? initial : 'indice');
+  </script>
+</body>
+</html>
